@@ -2,76 +2,37 @@
 
 ## Setup
 
-To avoid losing time, we have setup a Silex boilerplate to handle HTTP request/response.
-
-> The choice of Silex is arbitrary, we could have used Symfony, Laravel, whatever the frameworks... We are not interested in finding a master of frameworks, but a developer who knows how to code business rules so that they can be maintained over time.
-
 ```bash
-cd backend
+cd iwd-jobinterview
 composer install
 php -S localhost:8080 -t web web/index.php
 
 #Go to http://localhost:8080, you will see "Status OK"
 ```
 
-## Guidelines
+## Architecture
+### /src/client
+- Registers Services
+- Define Endpoints
+- Instanciate DAO and use it to retrieve and format datas
 
-We want to see your skills to design business code to produce **efficient** and **maintainable** code over time. This exercise might seem simple and some shortcuts can be used to develop these features quickly but we are more interested in how you might structure your code and classes if these features were to be just the **beginning of a larger project** destined to **evolve in time**.
-
-DO
-* Do use good design
-* Do maintainable design
-* Do use unit tests
-* Do use dependency management
-* Do use consistent code styles
-* Do use others dependencies if you want/need it
-* Follow PSR-x
-* Show the Business in your code
-
-DON'T DO
-* Do not loose time with optimization
-* Do not use Docker, Vagrant... we must be able to run the api only with the PHP server
-
-## Data
-
-The data folder contains some JSON files. Think of it as a database or any other persistence system.
-This is a list of survey answers by a sales man.  
-Different surveys are identified by the code (think of it as the id). Answers will be aggregated by survey code.
-
-You have 3 kind of questions:
-* qcm: the answer is an array of `true`/`false` (based on the `option` array)
-* number: the answer is a `number`
-* date: the answer is a `date`
-
-## The Test
-
-### Stage 1
-
-Expose the surveys through an api endpoint for read purpose.
-
-The API result must be:
-```JSON
-[{
-    "name": "Paris",
-    "code": "XX1"
-},{
-    "name": "Chartres",
-    "code": "XX2"
-},{
-    "name": "Melun",
-    "code": "XX3"
-}]
+### /src/DAO
+Data Access Object tasked with retrieving and formatting the datas. \
+The DAOFactory instanciate the right DAO, depending on the need. \
+The folder is organized as follow : \
 ```
+/DAO
+  DAOFactory.php
+  /Json (method of storage)
+    BaseDao.php
+    /Question (Ressource accessed)
+      DAO.php
+```
+That way, we can easily add new kind of DAO to access different kind of storage. \
+Also, DAO concerning the same kind of storage can share methods through the BaseDao.php \
 
-The order of those entries is not important.
+### /src/Entity
+Resources structure definition.
 
-### Stage 2
-
-Aggregate the answers by survey code, and expose it through an api endpoint.
-
-The aggregation will be different depending on the question type:
-* qcm: how much `Product 1`, how much `Product 2`...
-* number: the **average** of all answers
-* date: a list of `dates`
-
-The API result is not defined, do what you want, be creative and data centric.
+### /src/Interfaces/DAO
+Interfaces implemented by the DAO. They are organized by ressource, that way we can change the DAO retrieving a specific resource in the future without impacting the rest of the code.
