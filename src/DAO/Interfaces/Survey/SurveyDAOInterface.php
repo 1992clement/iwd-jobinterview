@@ -1,5 +1,5 @@
 <?php
-namespace IWD\JOBINTERVIEW\Interfaces\DAO\Survey;
+namespace IWD\JOBINTERVIEW\DAO\Interfaces\Survey;
 
 interface SurveyDAOInterface {
     public function getSurveys();

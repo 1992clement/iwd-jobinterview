@@ -5,11 +5,13 @@ namespace IWD\JOBINTERVIEW\Entity;
 class Survey {
   /**
   * Survey code
+  * @var string
   **/
   private $code;
 
   /**
   * Survey name
+  * @var string
   **/
   private $name;
 

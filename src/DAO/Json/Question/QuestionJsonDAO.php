@@ -2,7 +2,7 @@
 
 namespace IWD\JOBINTERVIEW\DAO\Json\Question;
 
-use IWD\JOBINTERVIEW\Interfaces\DAO\Question\QuestionDAOInterface;
+use IWD\JOBINTERVIEW\DAO\Interfaces\Question\QuestionDAOInterface;
 use IWD\JOBINTERVIEW\DAO\Json\BaseJsonDAO;
 use IWD\JOBINTERVIEW\Entity\Question;
 

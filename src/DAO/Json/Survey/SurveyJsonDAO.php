@@ -2,7 +2,7 @@
 
 namespace IWD\JOBINTERVIEW\DAO\Json\Survey;
 
-use IWD\JOBINTERVIEW\Interfaces\DAO\Survey\SurveyDAOInterface;
+use IWD\JOBINTERVIEW\DAO\Interfaces\Survey\SurveyDAOInterface;
 use IWD\JOBINTERVIEW\DAO\Json\BaseJsonDAO;
 use IWD\JOBINTERVIEW\Entity\Survey;
 
@@ -24,7 +24,7 @@ class SurveyJsonDAO extends BaseJsonDAO implements SurveyDAOInterface {
     }
 
     /**
-    * Returns surveys encoded in JSON
+    * Returns surveys list encoded in JSON
     * @return string
     **/
     public function getSurveysAsJson() {

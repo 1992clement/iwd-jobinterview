@@ -23,6 +23,7 @@ The folder is organized as follow : \
 ```
 /DAO
   DAOFactory.php
+  /Interfaces (interfaces that must be implemented by the different DAO)
   /Json (method of storage)
     BaseDao.php
     /Question (Ressource accessed)
@@ -30,9 +31,7 @@ The folder is organized as follow : \
 ```
 That way, we can easily add new kind of DAO to access different kind of storage. \
 Also, DAO concerning the same kind of storage can share methods through the BaseDao.php \
+Finally, /interfaces regroups the interfaces implemented by the different DAO. They are organized by ressource, that way we can change the method to retrieve a specific resource in the future, simply by switching the DAO, without impacting the rest of the code.
 
 ### /src/Entity
 Resources structure definition.
-
-### /src/Interfaces/DAO
-Interfaces implemented by the DAO. They are organized by ressource, that way we can change the DAO retrieving a specific resource in the future without impacting the rest of the code.

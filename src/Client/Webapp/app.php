@@ -39,21 +39,20 @@ $app['DAO.Factory'] = function () use ($app) {
     return new DAOFactory();
 };
 
-//Define a DAO Service to get surveys from JSON files
-$app['DAO.JSON.Survey'] = function () use ($app) {
+//Define a DAO Service to get surveys
+$app['DAO.Survey'] = function () use ($app) {
     return $app['DAO.Factory']->createDao(
     	DAOFactory::SURVEY_JSON_DAO, $app['serializer'], array('dataPath' => ROOT_PATH . '/data')
     );
 };
 
-$app['DAO.JSON.Question'] = function () use ($app) {
+$app['DAO.Question'] = function () use ($app) {
     return $app['DAO.Factory']->createDao(
     	DAOFactory::QUESTION_JSON_DAO, $app['serializer'], array('dataPath' => ROOT_PATH . '/data')
     );
 };
 
 /****** Routing ******/
-
 $app->after(function (Request $request, Response $response) {
     $response->headers->set('Access-Control-Allow-Origin', '*');
 	$response->headers->set('Content-Type', 'application/json');
@@ -64,11 +63,11 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/surveys', function () use ($app) {
-	return new Response($app['DAO.JSON.Survey']->getSurveysAsJson(), 200);
+	return new Response($app['DAO.Survey']->getSurveysAsJson(), 200);
 });
 
 $app->get('/surveys/{surveyCode}/answers', function ($surveyCode) use ($app) {
-	return new Response($app['DAO.JSON.Question']->getAggregatedAnswersBySurveyCodeAsJson($surveyCode), 200);
+	return new Response($app['DAO.Question']->getAggregatedAnswersBySurveyCodeAsJson($surveyCode), 200);
 });
 $app->run();
 
