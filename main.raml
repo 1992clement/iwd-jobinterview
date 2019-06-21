@@ -7,89 +7,94 @@ version: v1
 /surveys:
   get:
     description: Get the list of surveys
-    responses: 200
-      body: application/json:
-        example: |
-          {
-            "surveys": [
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
               {
-                "name": "Paris",
-                "code": "XX1"
-              },
-              {
-                "name": "Chartres",
-                "code": "XX2"
-              },
-              {
-                "name": "Melun",
-                "code": "XX3"
+                "surveys": [
+                  {
+                    "name": "Paris",
+                    "code": "XX1"
+                  },
+                  {
+                    "name": "Chartres",
+                    "code": "XX2"
+                  },
+                  {
+                    "name": "Melun",
+                    "code": "XX3"
+                  }
+                ]
               }
-            ]
-          }
-  /{surveyCode}/answers:
-    get:
-      description: Get the list of aggregated answers from a survey
-      response: 200
-        body: application/json:
-          example: |
-            {
-              "qcm": [
-                {
-                  "type": "qcm",
-                  "label": "What best sellers are available in your store?",
-                  "answers": {"Product 1" : 4, "Product 2" : 2}
-                },
-                {
-                  "type": "qcm",
-                  "label": "Another qcm question",
-                  "answers": {"Choice 1" : 4, "Choice 2" : 2, "Choice 3" : 3}
-                }
-              ],
-              "numeric": [
-                {
-                  "type": "numeric",
-                  "label": "number of products ?",
-                  "answers": 4733
-                },
-                {
-                  "type": "numeric",
-                  "label": "Another numeric question ?",
-                  "answers": 42
-                },
-              ],
-              "date": [
-                {
-                  "type": "date",
-                  "label": "What is the date ?",
-                  "answers": [
-                    {
-                      "timezone": {
-                        "name":"Z","transitions":false,"location":false
+  /{surveyCode}
+    /answers:
+      get:
+        description: Get the list of aggregated answers from a survey
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "qcm": [
+                      {
+                        "type": "qcm",
+                        "label": "What best sellers are available in your store?",
+                        "answers": {"Product 1" : 4, "Product 2" : 2}
                       },
-                      "offset":0,
-                      "timestamp":1472385890
-                    },
-                    {
-                      "timezone": {
-                        "name":"Z","transitions":false,"location":false
+                      {
+                        "type": "qcm",
+                        "label": "Another qcm question",
+                        "answers": {"Choice 1" : 4, "Choice 2" : 2, "Choice 3" : 3}
+                      }
+                    ],
+                    "numeric": [
+                      {
+                        "type": "numeric",
+                        "label": "number of products ?",
+                        "answers": 4733
                       },
-                      "offset":0,
-                      "timestamp":1508933090
-                    }
-                  ]
-                },
-                {
-                  "type": "date",
-                  "label": "Other date question ?",
-                  "answers": [
-                    {
-                      "timezone": {
-                        "name":"Z","transitions":false,"location":false
+                      {
+                        "type": "numeric",
+                        "label": "Another numeric question ?",
+                        "answers": 42
                       },
-                      "offset":0,
-                      "timestamp":1472385890
-                    }
-                  ]
-                }
-              ]
-            }
+                    ],
+                    "date": [
+                      {
+                        "type": "date",
+                        "label": "What is the date ?",
+                        "answers": [
+                          {
+                            "timezone": {
+                              "name":"Z","transitions":false,"location":false
+                            },
+                            "offset":0,
+                            "timestamp":1472385890
+                          },
+                          {
+                            "timezone": {
+                              "name":"Z","transitions":false,"location":false
+                            },
+                            "offset":0,
+                            "timestamp":1508933090
+                          }
+                        ]
+                      },
+                      {
+                        "type": "date",
+                        "label": "Other date question ?",
+                        "answers": [
+                          {
+                            "timezone": {
+                              "name":"Z","transitions":false,"location":false
+                            },
+                            "offset":0,
+                            "timestamp":1472385890
+                          }
+                        ]
+                      }
+                    ]
+                  }
